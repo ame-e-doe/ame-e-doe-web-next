@@ -5,50 +5,50 @@ import Header from "../components/header";
 import { Input } from "../components/input";
 
 export default function Cadastro() {
-  const { signIn } = useContext(AuthContext);
+  const { signUp } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
-  const [nome, setNome] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleLogin(event: FormEvent) {
+  async function handleRegister(event: FormEvent) {
     event.preventDefault();
-    const credentials = {
+
+    const data = {
+      firstName,
+      lastName,
       email,
-      nome,
-      sobrenome,
       password,
     };
-
-    await signIn(credentials);
+    await signUp(data);
   }
 
   return (
     <div className={styles.container}>
       <Header />
       <div className={styles.login}>
-        <form className={styles.form} action="" onSubmit={handleLogin}>
-          <Input
-            placeholder="email"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
+        <form className={styles.form} action="" onSubmit={handleRegister}>
           <Input
             placeholder="nome"
             type="text"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
 
           <Input
             placeholder="sobrenome"
             type="text"
-            value={sobrenome}
-            onChange={(e) => setSobrenome(e.target.value)}
+            value={lastName}
+            onChange={(e) => setlastName(e.target.value)}
+          />
+
+          <Input
+            placeholder="email"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
