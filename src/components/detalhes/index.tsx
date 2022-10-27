@@ -1,13 +1,11 @@
 import styles from "./styles.module.scss";
-import Header from "../header";
 import imagem from "../../assets/imagem.png";
-import Botao from "../button";
+import Carrossel from "../carrossel/carrossel";
 
 export default function Detalhes(){
 
     return(
-        <div className={styles.container}>
-      <Header />
+    <div className={styles.container}>
       <div className={styles.panel}>
         <div className={styles.principal}>
             <div className={styles.img}>
@@ -49,7 +47,7 @@ export default function Detalhes(){
             </div>
         </div>
         <div className={styles.secundario}>
-
+          <Carrossel/>
         </div>
       </div>
     </div>
