@@ -27,14 +27,14 @@ export default function Login() {
       <div className={styles.login}>
         <form className={styles.form} action="" onSubmit={handleLogin}>
           <Input
-            placeholder="email"
+            placeholder="Email"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
-            placeholder="senha"
+            placeholder="Senha"
             type="password"
             value={password}
             onChange={(e) => setpassword(e.target.value)}
