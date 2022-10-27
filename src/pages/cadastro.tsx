@@ -31,28 +31,28 @@ export default function Cadastro() {
       <div className={styles.login}>
         <form className={styles.form} action="" onSubmit={handleRegister}>
           <Input
-            placeholder="nome"
+            placeholder="Nome"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
 
           <Input
-            placeholder="sobrenome"
+            placeholder="Sobrenome"
             type="text"
             value={lastName}
             onChange={(e) => setlastName(e.target.value)}
           />
 
           <Input
-            placeholder="email"
+            placeholder="Email"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
-            placeholder="senha"
+            placeholder="Senha"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
