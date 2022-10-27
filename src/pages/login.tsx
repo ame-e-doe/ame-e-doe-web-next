@@ -3,6 +3,7 @@ import { AuthContext } from "../contexts/auth-context";
 import styles from "../../styles/home.module.scss";
 import Header from "../components/header";
 import { Input } from "../components/input";
+import { canSSRGuest } from "../utils/canSSRGuest";
 
 export default function Login() {
   const { signIn } = useContext(AuthContext);
@@ -47,3 +48,9 @@ export default function Login() {
     </div>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});
