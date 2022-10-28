@@ -34,14 +34,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
       });
 
-      const { accessToken } = response.data;
+      const { id, accessToken } = response.data;
       setCookie(undefined, "@nextauth.token", accessToken, {
         path: "/",
         maxAge: 60 * 60 * 24 * 30, // expiração do token
       });
+      setCookie(undefined, "@nextauth.id", id, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+      });
+
+      console.log(id);
+      console.log(accessToken);
 
       // passar para as proximas requisições o token
       api.defaults.headers.Authorization = `Bearer ${accessToken}`;
+      api.defaults.headers.common["idUser"] = id;
     } catch (err) {
       console.log("Error ao acessar", err);
     }
