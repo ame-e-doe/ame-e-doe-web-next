@@ -9,7 +9,7 @@ export default function Login() {
   const { signIn } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleLogin(event: FormEvent) {
@@ -38,7 +38,7 @@ export default function Login() {
             placeholder="Senha"
             type="password"
             value={password}
-            onChange={(e) => setpassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <button type="submit">Entrar </button>

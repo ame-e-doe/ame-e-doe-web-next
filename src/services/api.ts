@@ -9,6 +9,7 @@ export function setupApiClient(context = undefined) {
     baseURL: "http://localhost:8080/api",
     headers: {
       Authorization: `Bearer ${cookies["@nextauth.token"]}`,
+      idUser: `${cookies["@nextauth.id"]}`,
     },
   });
 
