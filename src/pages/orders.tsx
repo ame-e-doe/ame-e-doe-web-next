@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sales } from "../models/sales";
+import { Sales } from "../models/sales-type";
 import { setupApiClient } from "../services/api";
 import { canSSRAuth } from "../utils/canSSRAuth";
 
@@ -20,8 +20,6 @@ export default function Orders({ orderList }: ListOrder) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
   const apiClient = setupApiClient(ctx);
   const response = await apiClient.get("/sales/list");
-
-  console.log(response.data);
 
   return {
     props: {

@@ -2,7 +2,7 @@ import styles from "../../styles/home.module.scss";
 import { useState } from "react";
 import { setupApiClient } from "../services/api";
 import { canSSRAuth } from "../utils/canSSRAuth";
-import { Product } from "../models/product";
+import { Product } from "../models/product-type";
 
 interface ProductList {
   listProduct: Product[];
@@ -21,8 +21,6 @@ export default function Home({ listProduct }: ProductList) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
   const apiClient = setupApiClient(ctx);
   const response = await apiClient.get("/products/list");
-
-  console.log(response.data);
 
   return {
     props: {

@@ -1,5 +1,5 @@
-import { Category } from "./category";
-import { Image } from "./image";
+import { Category } from "./category-type";
+import { Image } from "./image-type";
 
 export type Product = {
   id: number;
