@@ -4,6 +4,7 @@ import { Input } from "../components/input";
 import { CreateCardDto } from "../dto/create-card-dto";
 import { setupApiClient } from "../services/api";
 import Header from "../components/header";
+import Head from "next/head";
 
 export default function Card() {
   const [numCard, setNumCart] = useState("");
@@ -40,6 +41,9 @@ export default function Card() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Cadastre seu Cartão!</title>
+      </Head>
       <Header />
       <div className={styles.card}>
         <h1> Cadastro de Cartão </h1>
@@ -72,7 +76,7 @@ export default function Card() {
 
             <Input
               placeholder="Validade"
-              type="text"
+              type="month"
               value={validate}
               onChange={(e) => setValidate(e.target.value)}
             />
@@ -83,7 +87,8 @@ export default function Card() {
             type="text"
             value={name}
             onChange={(e) => {
-              const numberPartter = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
+              const numberPartter =
+                /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
               const validateNumber = e.target.value.match(numberPartter) || [];
               const value = validateNumber.join("");
               setName(value);

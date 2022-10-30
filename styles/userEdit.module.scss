@@ -2,21 +2,15 @@
   background-image: url("../src/assets/Body.png");
   background-repeat: no-repeat;
   background-size: 50%;
-  background-attachment: fixed;
   background-position: center;
   background-color: #000000;
-  width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
 
-.cadastro {
+.userEdit {
   margin-top: 2rem;
-  width: 400px;
-  height: 450px;
+  width: 500px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,6 +19,8 @@
   padding: 2rem 1.5rem;
   background-color: rgba(0, 0, 0, 0.7);
   border: solid 1px var(--white);
+  position: relative;
+  left: calc(50% - 250px);
 
   h1 {
     color: var(--white);

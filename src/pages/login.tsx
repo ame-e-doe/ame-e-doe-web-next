@@ -1,9 +1,11 @@
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth-context";
-import styles from "../../styles/home.module.scss";
+import styles from "../../styles/login.module.scss";
 import Header from "../components/header";
 import { Input } from "../components/input";
 import { canSSRGuest } from "../utils/canSSRGuest";
+import Link from "next/link";
+import Head from "next/head";
 
 export default function Login() {
   const { signIn } = useContext(AuthContext);
@@ -24,8 +26,12 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Realize o Login!</title>
+      </Head>
       <Header />
       <div className={styles.login}>
+        <h1>Entrar</h1>
         <form className={styles.form} action="" onSubmit={handleLogin}>
           <Input
             placeholder="Email"
@@ -42,7 +48,9 @@ export default function Login() {
           />
 
           <button type="submit">Entrar </button>
-          <a href="#">Esqueceu a senha?</a>
+          <Link legacyBehavior href="/cadastro">
+            <a>Ainda não tem conta? Cadastre-se</a>
+          </Link>
         </form>
       </div>
     </div>
