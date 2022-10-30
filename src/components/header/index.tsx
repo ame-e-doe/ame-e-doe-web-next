@@ -6,12 +6,8 @@ export default function Header() {
     <div className={styles.header}>
       <h3>AME E DOE</h3>
       <div className={styles.botoesHeader}>
-        <Link legacyBehavior href="/login">
-          <a>ENTRAR</a>
-        </Link>
-        <Link legacyBehavior href="/cadastro">
-          <a>CADASTRE-SE</a>
-        </Link>
+        <Link href="/login">ENTRAR</Link>
+        <Link href="/cadastro">CADASTRE-SE</Link>
       </div>
     </div>
   );

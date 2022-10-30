@@ -66,9 +66,7 @@ export default function Cadastro() {
 
           <button type="submit">Entrar </button>
 
-          <Link legacyBehavior href="/login">
-            <a>Já realizou o Cadastro? Login</a>
-          </Link>
+          <Link href="/login">Já realizou o Cadastro? Login</Link>
         </form>
       </div>
     </div>

@@ -23,7 +23,7 @@ export default function UserEdit() {
   return (
     <div className={styles.container}>
       <Header />
-        <Nav/>
+      <Nav />
       <div className={styles.userEdit}>
         <h1>Editar dados da conta</h1>
         <form className={styles.form} action="" onSubmit={handleEditUser}>

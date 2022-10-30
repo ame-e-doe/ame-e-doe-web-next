@@ -4,27 +4,15 @@ import Link from "next/link";
 export default function Nav() {
   return (
     <div className={styles.nav}>
-
       <div className={styles.botoesNav}>
+        <Link href="#">Detalhes</Link>
 
-        <Link legacyBehavior href="#">
-          <a>Detalhes</a>
-        </Link>
+        <Link href="#">Minhas Imagens</Link>
 
-        <Link legacyBehavior href="#">
-          <a>Minhas Imagens</a>
-        </Link>
+        <Link href="/card">Adicionar cartão</Link>
 
-        <Link legacyBehavior href="/card">
-          <a>Adicionar cartão</a>
-        </Link>
-
-        <Link legacyBehavior href="#">
-          <a>Alterar senha</a>
-        </Link>
-
+        <Link href="#">Alterar senha</Link>
       </div>
-
     </div>
   );
 }
