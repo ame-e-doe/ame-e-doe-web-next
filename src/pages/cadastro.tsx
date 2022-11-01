@@ -34,7 +34,9 @@ export default function Cadastro() {
       </Head>
       <Header />
       <div className={styles.cadastro}>
-        <h1>Cadastre-se</h1>
+        <div className={styles.headerCadastro}>
+          <h1>Cadastre-se</h1>
+        </div>
         <form className={styles.form} action="" onSubmit={handleRegister}>
           <Input
             placeholder="Nome"
@@ -66,7 +68,9 @@ export default function Cadastro() {
 
           <button type="submit">Entrar </button>
 
-          <Link href="/login">Já realizou o Cadastro? Login</Link>
+          <Link href="/login">
+            <label> Já realizou o Cadastro? </label> Login
+          </Link>
         </form>
       </div>
     </div>

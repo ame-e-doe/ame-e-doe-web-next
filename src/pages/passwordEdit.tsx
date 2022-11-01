@@ -25,7 +25,9 @@ export default function PasswordEdit() {
       <Header />
       <Nav />
       <div className={styles.passwordEdit}>
-        <h1> Alterar senha</h1>
+        <div className={styles.headerPasswordEdit}>
+          <h1> Alterar senha </h1>
+        </div>
         <form className={styles.form} action="" onSubmit={handleEditUser}>
           <Input
             placeholder="Nova senha"

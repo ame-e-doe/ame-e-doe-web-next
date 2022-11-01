@@ -31,7 +31,9 @@ export default function Login() {
       </Head>
       <Header />
       <div className={styles.login}>
-        <h1>Entrar</h1>
+        <div className={styles.headerLogin}>
+          <h1>Entrar</h1>
+        </div>
         <form className={styles.form} action="" onSubmit={handleLogin}>
           <Input
             placeholder="Email"
@@ -48,7 +50,9 @@ export default function Login() {
           />
 
           <button type="submit">Entrar </button>
-          <Link href="/cadastro">Ainda não tem conta? Cadastre-se</Link>
+          <Link href="/cadastro">
+            <label> Ainda não tem conta? </label> Cadastre-se
+          </Link>
         </form>
       </div>
     </div>

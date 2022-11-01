@@ -46,9 +46,11 @@ export default function Card() {
         <title>Cadastre seu Cartão!</title>
       </Head>
       <Header />
-      <Nav/>
+      <Nav />
       <div className={styles.card}>
-        <h1> Cadastro de Cartão </h1>
+        <div className={styles.headerCard}>
+          <h1> Cadastro de Cartão </h1>
+        </div>
         <form className={styles.form} action="" onSubmit={saveCard}>
           <Input
             placeholder="Número do cartão"
