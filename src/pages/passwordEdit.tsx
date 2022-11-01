@@ -10,13 +10,13 @@ export default function PasswordEdit() {
   const { signIn } = useContext(AuthContext);
 
   const [newPassword, setNewPassword] = useState("");
-  const [repitPassword, setRepitPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
 
   async function handleEditUser(event: FormEvent) {
     event.preventDefault();
     const credentials = {
       newPassword,
-      repitPassword,
+      repeatPassword,
     };
   }
 
@@ -37,8 +37,8 @@ export default function PasswordEdit() {
           <Input
             placeholder="Insira novamente a senha"
             type="text"
-            value={repitPassword}
-            onChange={(e) => setRepitPassword(e.target.value)}
+            value={repeatPassword}
+            onChange={(e) => setRepeatPassword(e.target.value)}
           />
 
           <button type="submit"> Salvar </button>
