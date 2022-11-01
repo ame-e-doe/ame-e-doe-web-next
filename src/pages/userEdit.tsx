@@ -25,7 +25,9 @@ export default function UserEdit() {
       <Header />
       <Nav />
       <div className={styles.userEdit}>
-        <h1>Editar dados da conta</h1>
+        <div className={styles.headerUserEdit}>
+          <h1>Editar dados da conta</h1>
+        </div>
         <form className={styles.form} action="" onSubmit={handleEditUser}>
           <Input
             placeholder="Nome"

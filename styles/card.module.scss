@@ -6,27 +6,37 @@
   background-position: center;
   background-color: #000000;
   height: 100vh;
-
 }
 
 .card {
   margin-top: 2rem;
   width: 600px;
-  height: 380px;
+  height: 417px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 15px;
-  padding: 2rem 1.5rem;
+  //padding: 2rem 1.5rem;
   background-color: rgba(0, 0, 0, 0.7);
   border: solid 1px var(--white);
   position: relative;
   left: calc(50% - 250px);
+}
+
+.headerCard {
+  height: 70px;
+  background-color: #393939;
+  width: 100%;
+  border-radius: 15px 15px 0px 0px;
+  border: solid 1px var(--white);
+  position: relative;
+  top: -12%;
 
   h1 {
     color: var(--white);
     padding-bottom: 1rem;
+    text-align: center;
   }
 }
 

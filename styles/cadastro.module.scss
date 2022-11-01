@@ -26,10 +26,23 @@
   background-color: rgba(0, 0, 0, 0.7);
   border: solid 1px var(--white);
 
+}
+
+.headerCadastro{
+  height: 70px;
+  background-color: #393939;
+  width: 400px;
+  border-radius: 15px 15px 0px 0px;
+  border: solid 1px var(--white);
+  position: relative;
+  top: -12%;
+
   h1 {
     color: var(--white);
     padding-bottom: 1rem;
+    text-align: center;
   }
+
 }
 
 .form {
