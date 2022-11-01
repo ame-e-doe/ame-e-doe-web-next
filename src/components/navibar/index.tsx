@@ -5,13 +5,13 @@ export default function Nav() {
   return (
     <div className={styles.nav}>
       <div className={styles.botoesNav}>
-        <Link href="#">Detalhes</Link>
+        <Link href="/userEdit">Detalhes</Link>
 
         <Link href="#">Minhas Imagens</Link>
 
         <Link href="/card">Adicionar cartão</Link>
 
-        <Link href="#">Alterar senha</Link>
+        <Link href="/passwordEdit">Alterar senha</Link>
       </div>
     </div>
   );
