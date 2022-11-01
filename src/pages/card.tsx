@@ -5,6 +5,7 @@ import { CreateCardDto } from "../dto/create-card-dto";
 import { setupApiClient } from "../services/api";
 import Header from "../components/header";
 import Head from "next/head";
+import Nav from "../components/navibar";
 
 export default function Card() {
   const [numCard, setNumCart] = useState("");
@@ -45,6 +46,7 @@ export default function Card() {
         <title>Cadastre seu Cartão!</title>
       </Head>
       <Header />
+      <Nav/>
       <div className={styles.card}>
         <h1> Cadastro de Cartão </h1>
         <form className={styles.form} action="" onSubmit={saveCard}>

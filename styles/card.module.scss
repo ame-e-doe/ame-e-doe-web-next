@@ -5,12 +5,8 @@
   background-attachment: fixed;
   background-position: center;
   background-color: #000000;
-  width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+
 }
 
 .card {
@@ -25,6 +21,8 @@
   padding: 2rem 1.5rem;
   background-color: rgba(0, 0, 0, 0.7);
   border: solid 1px var(--white);
+  position: relative;
+  left: calc(50% - 250px);
 
   h1 {
     color: var(--white);
