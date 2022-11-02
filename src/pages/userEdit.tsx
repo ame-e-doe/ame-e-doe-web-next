@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth-context";
 import Header from "../components/header";
-import Nav from "../components/navibar";
+import Nav from "../components/navbar";
 import styles from "../../styles/userEdit.module.scss";
 import { Input } from "../components/input";
 import Link from "next/link";

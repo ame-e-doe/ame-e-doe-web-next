@@ -1,0 +1,35 @@
+.container {
+  background-image: url("../src/assets/Body.png");
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-attachment: fixed;
+  background-position: center;
+  background-color: #000000;
+  height: 100vh;
+  width: 100vw;
+
+  .myImages {
+    height: 400px;
+    margin-left: 45px;
+    margin-right: 45px;
+  
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: solid 1px var(--white);
+  }
+
+}
+
+.headerMyImages {
+  height: 70px;
+  background-color: #393939;
+  width: 100%;
+  border-radius: 15px 15px 0px 0px;
+  border: solid 1px var(--white);
+
+  h1 {
+    color: var(--white);
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+}

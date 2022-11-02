@@ -5,7 +5,7 @@ import { CreateCardDto } from "../dto/create-card-dto";
 import { setupApiClient } from "../services/api";
 import Header from "../components/header";
 import Head from "next/head";
-import Nav from "../components/navibar";
+import Nav from "../components/navbar";
 
 export default function Card() {
   const [numCard, setNumCart] = useState("");
