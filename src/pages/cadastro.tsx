@@ -66,7 +66,7 @@ export default function Cadastro() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit">Entrar </button>
+          <button type="submit"> Cadastar </button>
 
           <Link href="/login">
             <label> Já realizou o Cadastro? </label> Login

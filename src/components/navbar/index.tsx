@@ -7,7 +7,7 @@ export default function Nav() {
       <div className={styles.botoesNav}>
         <Link href="/userEdit">Detalhes</Link>
 
-        <Link href="#">Minhas Imagens</Link>
+        <Link href="/myImages">Minhas Imagens</Link>
 
         <Link href="/card">Adicionar cartão</Link>
 
