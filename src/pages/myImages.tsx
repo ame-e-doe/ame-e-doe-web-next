@@ -19,7 +19,16 @@ interface ListOrder {
 }
 
 export default function myImages({ orderList }: ListOrder) {
-  const [order, setOrder] = useState(orderList || []); 
+  const [order, setOrder] = useState(orderList || []);
+
+  const listProducts = [];
+
+  if (order.length > 0) {
+    order.forEach((p) => {
+      listProducts.push(p.products);
+    });
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -31,7 +40,6 @@ export default function myImages({ orderList }: ListOrder) {
         <div className={styles.headerMyImages}>
           <h1> Minhas Imagens </h1>
         </div>
-
       </div>
     </div>
   );
@@ -47,4 +55,3 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
     },
   };
 });
-
