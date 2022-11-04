@@ -2,6 +2,8 @@ import styles from "./styles.module.scss";
 import Link from "next/link";
 
 export default function Nav() {
+  //pesquisar como fazer com Next (converter a Dom)
+  //const titleCurrent = document.title;
   return (
     <div className={styles.nav}>
       <div className={styles.botoesNav}>

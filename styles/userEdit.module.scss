@@ -21,10 +21,9 @@
   border: solid 1px var(--white);
   position: relative;
   left: calc(50% - 250px);
-
 }
 
-.headerUserEdit{
+.headerUserEdit {
   height: 70px;
   background-color: #393939;
   width: 500px;
@@ -37,8 +36,8 @@
     color: var(--white);
     padding-bottom: 1rem;
     text-align: center;
+    padding: 12px;
   }
-
 }
 
 .form {

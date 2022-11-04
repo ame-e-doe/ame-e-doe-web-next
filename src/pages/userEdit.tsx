@@ -5,6 +5,7 @@ import Nav from "../components/navbar";
 import styles from "../../styles/userEdit.module.scss";
 import { Input } from "../components/input";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function UserEdit() {
   const { signIn } = useContext(AuthContext);
@@ -22,6 +23,9 @@ export default function UserEdit() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Edite sua conta!</title>
+      </Head>
       <Header />
       <Nav />
       <div className={styles.userEdit}>

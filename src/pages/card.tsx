@@ -43,7 +43,7 @@ export default function Card() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Cadastre seu Cartão!</title>
+        <title id="card" >Cadastre seu Cartão!</title>
       </Head>
       <Header />
       <Nav />

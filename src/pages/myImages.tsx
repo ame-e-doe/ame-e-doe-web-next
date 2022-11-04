@@ -6,6 +6,9 @@ import Nav from "../components/navbar";
 import { Product } from "../models/product-type";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import IconButton from "@mui/material/IconButton";
+//import InfoIcon from "@mui/icons-material/Info";
 
 import { useState } from "react";
 import { Sales } from "../models/sales-type";
@@ -40,13 +43,32 @@ export default function myImages({ orderList }: ListOrder) {
         <div className={styles.headerMyImages}>
           <h1> Minhas Imagens </h1>
         </div>
-        <ImageList sx={{ width: 600, height: 500 }} cols={4} rowHeight={164}>
-          {listProducts.map((item) => (
-            <ImageListItem key={item.id}>
-              <img src={item.image.url} alt={item.title} />
-            </ImageListItem>
-          ))}
-        </ImageList>
+        <div style={{padding:'2rem', display: 'flex', alignItems: 'center', justifyContent:'center'}} >
+            <ImageList style={{ gap: '3rem', display:'flex', flexWrap: 'wrap', justifyContent: 'center'}} sx={{ width: '100%', height: 250}}>
+              {listProducts.map((item) => {
+                console.log(item)
+                return (   
+                <ImageListItem style={{height:'250px', maxWidth:'250px'}} key={item.id}>
+                  <img style={{width:'250px', height: '100%', borderRadius: '15px'}} src={item.image.url} alt={item.title} />
+                  <ImageListItemBar
+                    title={
+                      <div style={{ height: "70px", whiteSpace: "break-spaces" }}>  
+                        {item.title}
+                      </div>
+                    }
+                    actionIcon={
+                      <IconButton
+                        sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                        aria-label={`info about ${item.title}`}
+                      >
+                        I
+                      </IconButton>
+                    } 
+                  />
+                </ImageListItem>
+             )})}
+            </ImageList>
+        </div>
       </div>
     </div>
   );
