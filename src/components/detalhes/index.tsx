@@ -1,79 +1,74 @@
 import styles from "./styles.module.scss";
-import imagem from "../../assets/imagem.png";
 import Carrossel from "../carrossel/carrossel";
-import { validate } from "json-schema";
-import { CreateCardDto } from "../../dto/create-card-dto";
 import { setupApiClient } from "../../services/api";
-import { FormEvent } from "react";
-import { ProductDto } from "../../dto/product-dto";
+import { useState } from "react";
 import { Product } from "../../models/product-type";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 
 
-async function getProduct(idProduct: number) {
+export default function Details(product: Product) {
+  const [produto, setResponse] = useState(product);
 
+  
   const api = setupApiClient();
-  const response = await api.get(`/products/${idProduct}`);
 
+  const res = async () => { await api.get<Product>(`/products/${product.id}`) };
 
-  return {
-    props: {
-      product: response.data,
-    }
-  }
-}
+  //setResponse(res)
 
+  // const response = async () => {
+  //   try {
+  //     const res = await api.get<Product>(`/products/${product.id}`);
+  //     setResponse(res.data);
+  //   } catch (error) {
+  //     console.log(JSON.stringify(error));
+  //   }
+  // };
 
+  // //response();
 
-export default function Details(idProduct: number){
-
-  const product = getProduct(idProduct)
-  return(
+  return (
     <div className={styles.container}>
       <div className={styles.panel}>
         <div className={styles.principal}>
-            <div className={styles.img}>
-              <h3>Nome Imagem</h3>
+          <div className={styles.img}>
+            <h3>{produto.title}</h3>
 
-              <img src={imagem.src} alt="imagem"/>
-            </div>
-            <div className={styles.infos}>
+            <img src={produto.image.url} alt="imagem" />
+          </div>
+          <div className={styles.infos}>
+            <div className={styles.propriedades}>
+              <h3>Propriedades</h3>
 
-              <div className={styles.propriedades}>
-
-                <h3>Propriedades</h3>
-
-                <div>
-                  <span>Tipo: </span> <label>PNG</label>
-                </div>
-                <div>
-                  <span>Tamanho: </span> <label>51.4KB</label>
-                </div>
-                <div>
-                  <span>Dimensões: </span> <label>227 x 222</label>
-                </div>
-
+              <div>
+                <span>Tipo: </span> <label>{produto.image.format}</label>
               </div>
-
-              <div className={styles.descricao}>
-                <h3>Descrição</h3>
-
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                  when an unknown printer took a galley.
-                </p>
-
-                <div>
-                  <label>R$500,00</label>
-                  <button type="submit">Comprar</button>
-                </div>
+              <div>
+                <span>Tamanho: </span> <label>51.4KB</label>
+              </div>
+              <div>
+                <span>Dimensões: </span> <label>{produto.image.height} x {produto.image.widht}</label>
               </div>
             </div>
+
+            <div className={styles.descricao}>
+              <h3>Descrição</h3>
+
+              <p>
+                {produto.description}
+              </p>
+
+              <div>
+                <label>{produto.value}</label>
+                <button type="submit">Comprar</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div className={styles.secundario}>
-          <Carrossel/>
+          <Carrossel />
         </div>
       </div>
     </div>
-    );
+  );
 }
