@@ -1,14 +1,17 @@
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth-context";
-import styles from "../../styles/home.module.scss";
+import styles from "../../styles/login.module.scss";
 import Header from "../components/header";
 import { Input } from "../components/input";
+import { canSSRGuest } from "../utils/canSSRGuest";
+import Link from "next/link";
+import Head from "next/head";
 
 export default function Login() {
   const { signIn } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function handleLogin(event: FormEvent) {
@@ -23,8 +26,14 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Realize o Login!</title>
+      </Head>
       <Header />
       <div className={styles.login}>
+        <div className={styles.headerLogin}>
+          <h1>Entrar</h1>
+        </div>
         <form className={styles.form} action="" onSubmit={handleLogin}>
           <Input
             placeholder="Email"
@@ -37,13 +46,21 @@ export default function Login() {
             placeholder="Senha"
             type="password"
             value={password}
-            onChange={(e) => setpassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <button type="submit">Entrar </button>
-          <a href="#">Esqueceu a senha?</a>
+          <Link href="/cadastro">
+            <label> Ainda não tem conta? </label> Cadastre-se
+          </Link>
         </form>
       </div>
     </div>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});

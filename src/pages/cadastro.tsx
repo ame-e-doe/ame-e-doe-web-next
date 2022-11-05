@@ -3,6 +3,8 @@ import { AuthContext } from "../contexts/auth-context";
 import styles from "../../styles/cadastro.module.scss";
 import Header from "../components/header";
 import { Input } from "../components/input";
+import Link from "next/link";
+import Head from "next/head";
 
 export default function Cadastro() {
   const { signUp } = useContext(AuthContext);
@@ -27,8 +29,14 @@ export default function Cadastro() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Realize seu Cadastro!</title>
+      </Head>
       <Header />
-      <div className={styles.login}>
+      <div className={styles.cadastro}>
+        <div className={styles.headerCadastro}>
+          <h1>Cadastre-se</h1>
+        </div>
         <form className={styles.form} action="" onSubmit={handleRegister}>
           <Input
             placeholder="Nome"
@@ -58,8 +66,11 @@ export default function Cadastro() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit">Entrar </button>
-          <a href="#">Já realizou o Cadastro? Login</a>
+          <button type="submit"> Cadastar </button>
+
+          <Link href="/login">
+            <label> Já realizou o Cadastro? </label> Login
+          </Link>
         </form>
       </div>
     </div>

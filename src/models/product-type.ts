@@ -1,11 +1,11 @@
-import { Category } from './category';
-import { Image } from './image';
+import { Category } from "./category-type";
+import { Image } from "./image-type";
 
-export interface Product {
+export type Product = {
   id: number;
   description: string;
   title: string;
   value: string;
   category: Category;
   image: Image;
-}
+};
