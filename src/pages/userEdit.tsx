@@ -22,7 +22,7 @@ export default function UserEdit() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Container}>
       <Head>
         <title>Edite sua conta!</title>
       </Head>

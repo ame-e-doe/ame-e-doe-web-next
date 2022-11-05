@@ -28,7 +28,7 @@ export default function Cadastro() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Container}>
       <Head>
         <title>Realize seu Cadastro!</title>
       </Head>

@@ -22,7 +22,7 @@ export default function PasswordEdit() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Container}>
       <Head>
         <title>Altere sua Senha!</title>
       </Head>

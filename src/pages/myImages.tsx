@@ -8,7 +8,7 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
-//import InfoIcon from "@mui/icons-material/Info";
+import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
 
 import { useState } from "react";
 import { Sales } from "../models/sales-type";
@@ -33,7 +33,7 @@ export default function myImages({ orderList }: ListOrder) {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Container}>
       <Head>
         <title>Minhas Imagens!</title>
       </Head>
@@ -44,7 +44,7 @@ export default function myImages({ orderList }: ListOrder) {
           <h1> Minhas Imagens </h1>
         </div>
         <div style={{padding:'2rem', display: 'flex', alignItems: 'center', justifyContent:'center'}} >
-            <ImageList style={{ gap: '3rem', display:'flex', flexWrap: 'wrap', justifyContent: 'center'}} sx={{ width: '100%', height: 250}}>
+            <ImageList style={{ gap: '3rem', display:'flex', flexWrap: 'wrap', justifyContent: 'center'}} sx={{ width: '100%'}}>
               {listProducts.map((item) => {
                 console.log(item)
                 return (   
@@ -52,7 +52,7 @@ export default function myImages({ orderList }: ListOrder) {
                   <img style={{width:'250px', height: '100%', borderRadius: '15px'}} src={item.image.url} alt={item.title} />
                   <ImageListItemBar
                     title={
-                      <div style={{ height: "70px", whiteSpace: "break-spaces" }}>  
+                      <div style={{ height: "30px", whiteSpace: "break-spaces" }}>  
                         {item.title}
                       </div>
                     }
@@ -61,7 +61,7 @@ export default function myImages({ orderList }: ListOrder) {
                         sx={{ color: "rgba(255, 255, 255, 0.54)" }}
                         aria-label={`info about ${item.title}`}
                       >
-                        I
+                        <SimCardDownloadIcon style={{color: '#E91C5D'}}/>
                       </IconButton>
                     } 
                   />

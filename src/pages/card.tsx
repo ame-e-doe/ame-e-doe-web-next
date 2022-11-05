@@ -41,7 +41,7 @@ export default function Card() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Container}>
       <Head>
         <title id="card" >Cadastre seu Cartão!</title>
       </Head>

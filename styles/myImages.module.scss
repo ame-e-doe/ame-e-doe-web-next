@@ -1,14 +1,15 @@
-.container {
+.Container {
   background-image: url("../src/assets/Body.png");
   background-repeat: no-repeat;
   background-size: 50%;
   background-attachment: fixed;
   background-position: center;
   background-color: #000000;
-  height: 100vh;
+  height: 100%;
+  padding-bottom: 25px;
 
   .myImages {
-    height: 400px;
+    height: auto;
     margin-left: 5%;
     margin-right: 5%;
 
