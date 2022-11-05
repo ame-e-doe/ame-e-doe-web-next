@@ -1,9 +1,11 @@
 import styles from "./styles.module.scss";
 import Carrossel from "../carrossel/carrossel";
 import { setupApiClient } from "../../services/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../../models/product-type";
 import { canSSRAuth } from "../../utils/canSSRAuth";
+import TesteCarrossel from "../testeCarrossel";
+import { ImageListItem } from "@mui/material";
 
 
 export default function Details(product: Product) {
@@ -12,29 +14,22 @@ export default function Details(product: Product) {
   
   const api = setupApiClient();
 
-  const res = async () => { await api.get<Product>(`/products/${product.id}`) };
+  useEffect(()=>{
+    api.get(`/products/${product.id}`).then(response => setResponse(response.data))
+  },[])
+  
 
-  //setResponse(res)
-
-  // const response = async () => {
-  //   try {
-  //     const res = await api.get<Product>(`/products/${product.id}`);
-  //     setResponse(res.data);
-  //   } catch (error) {
-  //     console.log(JSON.stringify(error));
-  //   }
-  // };
-
-  // //response();
+  //response();
 
   return (
-    <div className={styles.container}>
       <div className={styles.panel}>
         <div className={styles.principal}>
           <div className={styles.img}>
             <h3>{produto.title}</h3>
 
-            <img src={produto.image.url} alt="imagem" />
+            <ImageListItem key={produto.id} className={styles.img}>
+              <img src={produto.image.url} alt={produto.title} />
+            </ImageListItem>
           </div>
           <div className={styles.infos}>
             <div className={styles.propriedades}>
@@ -66,9 +61,8 @@ export default function Details(product: Product) {
           </div>
         </div>
         <div className={styles.secundario}>
-          <Carrossel />
         </div>
       </div>
-    </div>
   );
 }
+
