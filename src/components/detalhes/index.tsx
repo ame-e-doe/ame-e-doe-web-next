@@ -1,10 +1,34 @@
 import styles from "./styles.module.scss";
 import imagem from "../../assets/imagem.png";
 import Carrossel from "../carrossel/carrossel";
+import { validate } from "json-schema";
+import { CreateCardDto } from "../../dto/create-card-dto";
+import { setupApiClient } from "../../services/api";
+import { FormEvent } from "react";
+import { ProductDto } from "../../dto/product-dto";
+import { Product } from "../../models/product-type";
+import { canSSRAuth } from "../../utils/canSSRAuth";
 
-export default function Detalhes(){
 
-    return(
+async function getProduct(idProduct: number) {
+
+  const api = setupApiClient();
+  const response = await api.get(`/products/${idProduct}`);
+
+
+  return {
+    props: {
+      product: response.data,
+    }
+  }
+}
+
+
+
+export default function Details(idProduct: number){
+
+  const product = getProduct(idProduct)
+  return(
     <div className={styles.container}>
       <div className={styles.panel}>
         <div className={styles.principal}>
