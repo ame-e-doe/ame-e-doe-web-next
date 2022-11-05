@@ -25,7 +25,7 @@ export default function Login() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Container}>
       <Head>
         <title>Realize o Login!</title>
       </Head>

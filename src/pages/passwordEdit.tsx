@@ -5,6 +5,7 @@ import Nav from "../components/navbar";
 import styles from "../../styles/passwordEdit.module.scss";
 import { Input } from "../components/input";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function PasswordEdit() {
   const { signIn } = useContext(AuthContext);
@@ -21,7 +22,10 @@ export default function PasswordEdit() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Container}>
+      <Head>
+        <title>Altere sua Senha!</title>
+      </Head>
       <Header />
       <Nav />
       <div className={styles.passwordEdit}>

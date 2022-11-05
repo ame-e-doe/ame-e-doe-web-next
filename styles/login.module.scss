@@ -1,4 +1,4 @@
-.container {
+.Container {
   background-image: url("../src/assets/Body.png");
   background-repeat: no-repeat;
   background-size: 50%;
@@ -40,7 +40,7 @@
     color: var(--white);
     padding-bottom: 1rem;
     text-align: center;
-
+    padding: 12px;
   }
 
 }
