@@ -3,7 +3,8 @@ import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
 } from "next";
-import { parseCookies } from "nookies";
+import { destroyCookie, parseCookies } from "nookies";
+import { AuthTokenError } from "../services/errors/auth-token-error";
 
 //função para paginas que só podem ser acessadas por usuarios autenticados
 export function canSSRAuth<P>(fn: GetServerSideProps<P>) {
@@ -25,7 +26,10 @@ export function canSSRAuth<P>(fn: GetServerSideProps<P>) {
     try {
       return await fn(ctx);
     } catch (err) {
-      //desloga o user
+      if (err instanceof AuthTokenError) {
+        destroyCookie(ctx, "@nextauth.token");
+      }
+
       return {
         redirect: {
           destination: "/login",
