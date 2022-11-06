@@ -1,7 +1,6 @@
-import { Alert, AlertTitle } from "@mui/material";
 import Router from "next/router";
-import { destroyCookie, setCookie } from "nookies";
-import { createContext, ReactNode, useState } from "react";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { createContext, ReactNode, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { CreateUserDto } from "../dto/create-user-dto";
 import { SiginDto } from "../dto/singnin-dto";
@@ -18,7 +17,7 @@ interface AuthContextData {
 
 interface UserProps {
   id: number;
-  name: string;
+  firstName: string;
   email: string;
 }
 
@@ -32,8 +31,6 @@ export function signOut() {
   try {
     destroyCookie(undefined, "@nextauth.token");
     destroyCookie(undefined, "@nextauth.id");
-
-    toast.success("deslogado com sucesso");
     Router.push("/login");
   } catch (err) {
     console.log("erro ao deslogar");
@@ -41,17 +38,38 @@ export function signOut() {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<UserProps>();
+  const [user, setUser] = useState<UserProps>(undefined);
   const isAuthenticated = !(user == null);
 
-  async function signIn({ email, password }: SiginDto) {
+  useEffect(() => {
+    const { "@nextauth.token": token } = parseCookies();
+
+    if (token) {
+      api
+        .get("/user/me")
+        .then((response) => {
+          const { id, firstName, username } = response.data;
+          setUser({
+            id,
+            firstName,
+            email: username,
+          });
+        })
+        .catch(() => {
+          setUser(undefined);
+          signOut();
+        });
+    }
+  }, []);
+
+  async function signIn({ email: login, password }: SiginDto) {
     try {
       const response = await api.post("/auth/login", {
-        email,
+        email: login,
         password,
       });
 
-      const { id, accessToken } = response.data;
+      const { id, accessToken, firstName, email } = response.data;
       setCookie(undefined, "@nextauth.token", accessToken, {
         path: "/",
         maxAge: 60 * 60 * 24 * 30, // expiração do token
@@ -60,6 +78,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         path: "/",
         maxAge: 60 * 60 * 24 * 30,
       });
+
+      setUser({ id, firstName, email });
 
       // passar para as proximas requisições o token
       api.defaults.headers.Authorization = `Bearer ${accessToken}`;

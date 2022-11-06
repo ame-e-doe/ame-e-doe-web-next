@@ -1,10 +1,10 @@
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth-context";
 import styles from "../../styles/cadastro.module.scss";
-import Header from "../components/header";
 import { Input } from "../components/input";
 import Link from "next/link";
 import Head from "next/head";
+import { canSSRGuest } from "../utils/canSSRGuest";
 
 export default function Cadastro() {
   const { signUp } = useContext(AuthContext);
@@ -32,7 +32,6 @@ export default function Cadastro() {
       <Head>
         <title>Realize seu Cadastro!</title>
       </Head>
-      <Header />
       <div className={styles.cadastro}>
         <div className={styles.headerCadastro}>
           <h1>Cadastre-se</h1>
@@ -76,3 +75,9 @@ export default function Cadastro() {
     </div>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});
