@@ -4,6 +4,15 @@
   border: solid 1px var(--white);
   display: flex;
   width: 100%;
+  height: 100%;
+  flex-direction: column;
+  padding: 10px;
+
+  h3{
+    color: #ED145B;
+    text-align: start;
+    margin: 10px;
+  }
     
     .principal{
       display: flex;
@@ -11,113 +20,115 @@
       height: 70%;
 
       .img{
-        width: 50%;
-        height: 90%;
+        width: 75%;
+        height: 85%;
         border-radius: 10px;
-        margin: 5px;
+        margin: 10px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+        justify-content: space-around;
+        border: 1px solid white;
+        padding: 20px;
 
-        h3{
-          color: #ED145B;
-          text-align: center;
+        img{
+          width: 30%;
+          height: 90%;
+          border-radius: 10px;
+        }
+
+        .propriedades{
+          width: 50%;
+          height: 90%;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          justify-content: space-between;
           margin: 10px;
+    
+          div{
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+    
+            span{
+              align-self: baseline;
+              width: 50%;
+              margin: 10px;
+              color: white;
+            }
+    
+            label{
+              align-self: baseline;
+              text-align: right;
+              width: 50%;
+              margin: 10px;
+              color: white;
+            }
+          }
+          
         }
       }
 
       .infos{
-        width: 80%;
-        height: 90%;
+        width: 25%;
+        height: 85%;
         border-radius: 10px;
-        margin: 5px;
-        flex-direction: column;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
-    }
-
-    .propriedades{
-      width: 90%;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-
-      h3{
-        color: #ED145B;
-        text-align: left;
         margin: 10px;
-        width: 100%;
-      }
-
-      div{
-        width: 100%;
+        flex-direction: row;
         display: flex;
-
-        span{
-          align-self: baseline;
-          width: 50%;
-          margin: 10px;
-          color: white;
-        }
-
-        label{
-          align-self: baseline;
-          text-align: right;
-          width: 50%;
-          margin: 10px;
-          color: white;
-        }
-      }
-      
-    }
-
-    .descricao{
-      width: 90%;
-      display: flex;
-      flex-direction: column;
-
-      h3{
-        color: #ED145B;
-        text-align: left;
-        margin: 10px;
-      }
-
-      p{
-        color: white;
-        text-align: left;
-        margin: 10px;
-        width: 80%;
-        margin-bottom: 50px;
-      }
-
-      div{
-        align-self: center;
-        display: flex;
+        justify-content: space-between;
+        border: 1px solid white;
         flex-wrap: wrap;
-        align-items: center;
-        
-        label{
+    
+        .descricao{
+          margin: 10px;
           width: 100%;
-          text-align: center;
-          margin-bottom: 10px;
-          color: white;
+    
+          p{
+            color: white;
+            text-align: left;
+            margin: 10px;
+            width: 80%;
+            margin-bottom: 50px;
+            text-align: start;
+          }  
         }
 
-        button {
-          height: 50px;
-          width: 200px;
-          border-radius: 8px;
-          border: none;
-          background: var(--pink-900);
-          color: var(--white);
-          font-weight: bold;
-          padding: 5px;
-          margin: auto;
+        div{
+          margin: 10px;
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          flex-direction: column;
+
+          span{
+            text-align: center;
+            color: white;
+          }
+  
+          button {
+            margin-top: 30px;
+            height: 50px;
+            width: 100%;
+            border-radius: 8px;
+            border: none;
+            background: var(--pink-900);
+            color: var(--white);
+            font-weight: bold;
+            padding: 5px;
+            margin: auto;
+          }
+
+          .value{
+            font-size: 30px;
+            text-align: start;
+          }
         }
       }
     }
+
+    
 
     .secundario{
       display: flex;

@@ -1,11 +1,7 @@
 import styles from "./styles.module.scss";
-import Carrossel from "../carrossel/carrossel";
 import { setupApiClient } from "../../services/api";
 import { useEffect, useState } from "react";
 import { Product } from "../../models/product-type";
-import { canSSRAuth } from "../../utils/canSSRAuth";
-import TesteCarrossel from "../testeCarrossel";
-import { ImageListItem } from "@mui/material";
 
 
 export default function Details(product: Product) {
@@ -18,6 +14,10 @@ export default function Details(product: Product) {
     api.get(`/products/${product.id}`).then(response => setResponse(response.data))
   },[])
   
+  let price
+
+  (produto.value != null) ? price = produto.value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) : 0;
+  
 
   //response();
 
@@ -25,14 +25,12 @@ export default function Details(product: Product) {
       <div className={styles.panel}>
         <div className={styles.principal}>
           <div className={styles.img}>
-            <h3>{produto.title}</h3>
+            <img src={produto.image.url} alt={produto.title}/>
 
-            <ImageListItem key={produto.id} className={styles.img}>
-              <img src={produto.image.url} alt={produto.title} />
-            </ImageListItem>
-          </div>
-          <div className={styles.infos}>
             <div className={styles.propriedades}>
+
+              <h3>{produto.title}</h3>
+
               <h3>Propriedades</h3>
 
               <div>
@@ -46,18 +44,22 @@ export default function Details(product: Product) {
               </div>
             </div>
 
+          </div>
+
+          <div className={styles.infos}>
+
             <div className={styles.descricao}>
               <h3>Descrição</h3>
 
               <p>
                 {produto.description}
               </p>
+            </div>
 
-              <div>
-                <label>{produto.value}</label>
+            <div>
+                <span className={styles.value}>{price}</span>
                 <button type="submit">Comprar</button>
               </div>
-            </div>
           </div>
         </div>
         <div className={styles.secundario}>
