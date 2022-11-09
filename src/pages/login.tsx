@@ -1,7 +1,6 @@
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth-context";
 import styles from "../../styles/login.module.scss";
-import Header from "../components/header";
 import { Input } from "../components/input";
 import { canSSRGuest } from "../utils/canSSRGuest";
 import Link from "next/link";
@@ -29,7 +28,6 @@ export default function Login() {
       <Head>
         <title>Realize o Login!</title>
       </Head>
-      <Header />
       <div className={styles.login}>
         <div className={styles.headerLogin}>
           <h1>Entrar</h1>
