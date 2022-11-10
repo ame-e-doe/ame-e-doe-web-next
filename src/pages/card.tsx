@@ -6,9 +6,10 @@ import { setupApiClient } from "../services/api";
 import Header from "../components/header";
 import Head from "next/head";
 import Nav from "../components/navbar";
+import { toast } from "react-toastify";
 
 export default function Card() {
-  const [numCard, setNumCart] = useState("");
+  const [numCard, setNumCard] = useState("");
   const [cvv, setCvv] = useState("");
   const [validate, setValidate] = useState("");
   const [name, setName] = useState("");
@@ -30,20 +31,40 @@ export default function Card() {
     const securityCode = cvv;
 
     const api = setupApiClient();
-    await api.post("/card/create", {
-      cardNumber,
-      printedName,
-      expirationDate,
-      securityCode,
-    });
+    await api
+      .post("/card/create", {
+        cardNumber,
+        printedName,
+        expirationDate,
+        securityCode,
+      })
+      .then((response) => {
+        toast.success("Cartão salvo com sucesso.");
+        cleanFields();
+        console.log(response);
+      })
+      .catch((err) => {
+        toast.error(
+          "Não foi possivel salvar o cartão, tente novamente mais tarde."
+        );
+        cleanFields();
+        console.log(err);
+      });
 
     console.log("Cartão salvo com sucesso");
+  }
+
+  function cleanFields() {
+    setNumCard("");
+    setCvv("");
+    setValidate("");
+    setName("");
   }
 
   return (
     <div className={styles.Container}>
       <Head>
-        <title id="card" >Cadastre seu Cartão!</title>
+        <title id="card">Cadastre seu Cartão!</title>
       </Head>
       <Header />
       <Nav />
@@ -56,11 +77,13 @@ export default function Card() {
             placeholder="Número do cartão"
             type="text"
             value={numCard}
+            maxLength={16}
+            minLength={16}
             onChange={(e) => {
               const numberPattern = /\d+/g;
               const validacaoNumero = e.target.value.match(numberPattern) || [];
               const value = validacaoNumero.join("");
-              setNumCart(value);
+              setNumCard(value);
             }}
           />
           <div className={styles.cvv}>
@@ -69,6 +92,7 @@ export default function Card() {
               type="text"
               value={cvv}
               maxLength={3}
+              minLength={3}
               onChange={(e) => {
                 const numberPartter = /\d+/g;
                 const validateNumber =
@@ -90,6 +114,7 @@ export default function Card() {
             placeholder="Nome"
             type="text"
             value={name}
+            minLength={10}
             onChange={(e) => {
               const numberPartter =
                 /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
