@@ -8,6 +8,7 @@ import { useState, useContext } from "react";
 import Router from "next/router";
 import { AuthContext, signOut } from "../../contexts/auth-context";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,7 +35,7 @@ export default function Header() {
 
   return (
     <div className={styles.header}>
-      <h3>AME E DOE</h3>
+      <h3> <Link href="/"> AME E DOE </Link> </h3>
       <div className={styles.botoesHeader}>
         <Box>
           {user && (
