@@ -7,13 +7,16 @@ import { CreateSaleDto } from "../dto/create-sale-dto";
 import Router from "next/router";
 import { toast } from "react-toastify";
 import { CartItem } from "../models/cart-item-type";
+import { Card } from "../models/card-type";
 
 export interface ShoppingCart {
   cart: CartType;
+  listCards: Card[];
 }
 
-export default function Cart({ cart }: ShoppingCart) {
+export default function Cart({ cart, listCards }: ShoppingCart) {
   const [itens, setItens] = useState<CartType>(cart);
+  const [cards, setCards] = useState<Card[]>(listCards);
   const [cartItens, setCartItens] = useState<CartItem[]>(itens.cartItems);
 
   let listProducts: Product[] = [];
@@ -24,7 +27,6 @@ export default function Cart({ cart }: ShoppingCart) {
 
   const api = setupApiClient();
 
-  //finaliza o pedido
   async function finishOrder() {
     const sale: CreateSaleDto = {
       value: itens.total,
@@ -46,7 +48,6 @@ export default function Cart({ cart }: ShoppingCart) {
       });
   }
 
-  //remove item do carrinho
   async function removeItem(itemId: number) {
     await api
       .delete(`/cart/${itemId}`)
@@ -58,7 +59,6 @@ export default function Cart({ cart }: ShoppingCart) {
             return i.id !== itemId;
           })
         );
-
         console.log(response);
       })
       .catch(function (error) {
@@ -69,32 +69,48 @@ export default function Cart({ cart }: ShoppingCart) {
 
   return (
     <div>
-      <h1>Aqui vou exibir o carrinho</h1>
+      <section style={{ color: "#fff" }}>
+        <h1>Aqui vou exibir o carrinho</h1>
 
-      <div style={{ color: "#fff" }}>
-        {cartItens.map((item) => (
-          <section key={item.id}>
-            <p>{item.price}</p>
-            <p>{item.product.title}</p>
-            <p>{item.product.description}</p>
-            <p>{item.product.value}</p>
-          </section>
-        ))}
-      </div>
+        <div>
+          {cartItens.map((item) => (
+            <section key={item.id}>
+              <p>{item.price}</p>
+              <p>{item.product.title}</p>
+              <p>{item.product.description}</p>
+              <p>{item.product.value}</p>
+            </section>
+          ))}
+        </div>
+
+        <h1> Cartões </h1>
+        <div>
+          {cards.map((item) => (
+            <section key={item.id}>
+              <p>{item.cardNumber}</p>
+              <p>{item.expirationDate}</p>
+              <p>{item.printedName}</p>
+              <p>{item.securityCode}</p>
+            </section>
+          ))}
+        </div>
+      </section>
 
       <button onClick={finishOrder}> Finalizar Venda </button>
-      <button onClick={() => removeItem(18)}>Remove produto do carrinho</button>
+      <button onClick={() => removeItem(17)}>Remove produto do carrinho</button>
     </div>
   );
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
   const apiClient = setupApiClient(ctx);
-  const response = await apiClient.get("/cart");
+  const shoppingCart = await apiClient.get("/cart");
+  const cards = await apiClient.get("/card/list");
 
   return {
     props: {
-      cart: response.data,
+      cart: shoppingCart.data,
+      listCards: cards.data,
     },
   };
 });
