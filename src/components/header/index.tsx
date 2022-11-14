@@ -23,6 +23,11 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const cart = () => {
+    Router.push("/cart2");
+    setAnchorEl(null);
+  };
+
   const exit = () => {
     toast.success("deslogado com sucesso");
     signOut();
@@ -61,6 +66,7 @@ export default function Header() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={myAccount}>Minha Conta</MenuItem>
+                <MenuItem onClick={cart}>Carrinho</MenuItem>
                 <MenuItem onClick={exit}>Sair</MenuItem>
               </Menu>
             </div>

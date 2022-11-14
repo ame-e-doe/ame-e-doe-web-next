@@ -8,6 +8,8 @@ import Router from "next/router";
 import { toast } from "react-toastify";
 import { CartItem } from "../models/cart-item-type";
 import { Card } from "../models/card-type";
+import styles from "../../styles/cart.module.scss";
+import Header from "../components/header";
 
 export interface ShoppingCart {
   cart: CartType;
@@ -69,9 +71,10 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
 
   return (
     <div>
-      <section style={{ color: "#fff" }}>
-        <h1>Aqui vou exibir o carrinho</h1>
-
+      <div className={styles.Container}>
+        <Header/>
+      </div>
+      <section>  
         <div>
           {cartItens.map((item) => (
             <section key={item.id}>

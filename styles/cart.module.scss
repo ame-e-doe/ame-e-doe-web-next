@@ -1,0 +1,80 @@
+.Container {
+  background-image: url("../src/assets/Body.png");
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-attachment: fixed;
+  background-position: center;
+  background-color: #000000;
+  height: 100vh;
+  padding-bottom: 25px;
+}
+
+.cartContainer {
+  height: 80%;
+  width: 60%;
+  margin: 80px 0 20% 20%;
+  border: 1px solid var(--white);
+  border-radius: 15px;
+}
+
+.divisao {
+  display: flex;
+  height: 90%;
+  width: 100%;
+  background-color: #393939;
+  border-radius: 0 0 15px 15px;
+}
+
+.cartLeft {
+  height: 100%;
+  width: 50%;
+}
+
+.lineSale {
+  border: 1px solid #000000;
+  margin: 5%;
+}
+
+.cartRight {
+  height: 100%;
+  width: 50%;
+  border-left: 1px solid var(--white);
+  border-radius: 0 0 15px 0;
+  background-color: #d9d9d9;
+}
+
+.itens {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10%;
+  margin-right: 20%;
+}
+
+.totalPedido {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10%;
+  margin-right: 20%;
+}
+
+.headerCart {
+  height: 10%;
+  background-color: #393939;
+  width: 100%;
+  border-radius: 15px 15px 0px 0px;
+  border: solid 1px var(--white);
+
+  h1 {
+    color: var(--white);
+    padding-bottom: 1rem;
+    text-align: center;
+    padding: 12px;
+  }
+}
