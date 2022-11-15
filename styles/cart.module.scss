@@ -31,6 +31,16 @@
   overflow-y: auto;
 }
 
+.infosCart{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30px;
+    font-weight: bold;
+    color: var(--white);
+    text-align: justify;
+}
+
 .lineSale {
   border: 1px solid #000000;
   margin: 5%;

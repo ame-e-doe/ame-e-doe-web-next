@@ -14,6 +14,11 @@ import Header from "../components/header";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import IconButton from "@mui/material/IconButton";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 export interface ShoppingCart {
   cart: CartType;
   listCards: Card[] | null;
@@ -100,6 +105,63 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
             >
               ITENS
             </h3>
+
+            <ImageList
+              style={{ gap: "3rem", display: "flex", flexWrap: "wrap" }}
+              sx={{ width: "80%", marginLeft: "20px" }}
+            >
+              {listProducts.map((item) => {
+                console.log(item);
+                return (
+                  <ImageListItem
+                    style={{
+                      height: "250px",
+                      maxWidth: "500px",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                    key={item.id}
+                  >
+                    <img
+                      style={{
+                        width: "250px",
+                        height: "100%",
+                        borderRadius: "15px",
+                      }}
+                      src={item.image.url}
+                      alt={item.title}
+                    />
+                    <div className={styles.infosCart}>
+                      <label style={{ paddingBottom: "5px" }}>
+                        {item.title}
+                      </label>
+                      <label style={{ paddingBottom: "5px" }}>
+                        {item.category.description}
+                      </label>
+                      <label style={{ paddingBottom: "5px" }}>
+                        R$ {item.value}
+                      </label>
+
+                      <label
+                        onClick={() => {
+                          removeItem(item.id);
+                        }}
+                      >
+                        <DeleteForeverIcon
+                          style={{
+                            color: "#E91C5D",
+                            cursor: "pointer",
+                            marginTop: "10px",
+                          }}
+                        />
+                      </label>
+                    </div>
+                  </ImageListItem>
+                );
+              })}
+            </ImageList>
+
             <div
               style={{
                 padding: "2rem",
