@@ -11,17 +11,17 @@ import { Card } from "../models/card-type";
 
 export interface ShoppingCart {
   cart: CartType;
-  listCards: Card[];
+  listCards: Card[] | null;
 }
 
 export default function Cart({ cart, listCards }: ShoppingCart) {
   const [itens, setItens] = useState<CartType>(cart);
   const [cards, setCards] = useState<Card[]>(listCards);
-  const [cartItens, setCartItens] = useState<CartItem[]>(itens.cartItems);
+  const [cartItens, setCartItens] = useState<CartItem[]>(itens?.cartItems);
 
   let listProducts: Product[] = [];
 
-  itens.cartItems.forEach((i) => {
+  itens?.cartItems.forEach((i) => {
     listProducts.push(i.product);
   });
 
@@ -36,12 +36,12 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
     };
     await api
       .post("/sales/create", sale)
-      .then(function (response) {
+      .then((response) => {
         toast.success("Compra finalizada com sucesso.");
         Router.push("/myImages");
         console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         toast.error("Algo deu errado, tente novamente mais tarde.");
         Router.push("/");
         console.log(error);
@@ -51,7 +51,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
   async function removeItem(itemId: number) {
     await api
       .delete(`/cart/${itemId}`)
-      .then(function (response) {
+      .then((response) => {
         toast.success("Item removido com sucesso");
 
         setCartItens(
@@ -61,7 +61,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
         );
         console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         toast.error("Algo deu errado, tente novamente mais tarde.");
         console.log(error);
       });
@@ -73,26 +73,34 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
         <h1>Aqui vou exibir o carrinho</h1>
 
         <div>
-          {cartItens.map((item) => (
-            <section key={item.id}>
-              <p>{item.price}</p>
-              <p>{item.product.title}</p>
-              <p>{item.product.description}</p>
-              <p>{item.product.value}</p>
-            </section>
-          ))}
+          {cartItens?.length > 0 ? (
+            cartItens.map((item) => (
+              <section key={item.id}>
+                <p>{item.price}</p>
+                <p>{item.product.title}</p>
+                <p>{item.product.description}</p>
+                <p>{item.product.value}</p>
+              </section>
+            ))
+          ) : (
+            <p> Carrinho vazio </p>
+          )}
         </div>
 
         <h1> Cartões </h1>
         <div>
-          {cards.map((item) => (
-            <section key={item.id}>
-              <p>{item.cardNumber}</p>
-              <p>{item.expirationDate}</p>
-              <p>{item.printedName}</p>
-              <p>{item.securityCode}</p>
-            </section>
-          ))}
+          {cards?.length > 0 ? (
+            cards.map((item) => (
+              <section key={item.id}>
+                <p>{item.cardNumber}</p>
+                <p>{item.expirationDate}</p>
+                <p>{item.printedName}</p>
+                <p>{item.securityCode}</p>
+              </section>
+            ))
+          ) : (
+            <p> Nenhum cartão cadastrado </p>
+          )}
         </div>
       </section>
 
@@ -105,12 +113,21 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
   const apiClient = setupApiClient(ctx);
   const shoppingCart = await apiClient.get("/cart");
-  const cards = await apiClient.get("/card/list");
+
+  const cards = await apiClient
+    .get("/card/list")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
 
   return {
     props: {
       cart: shoppingCart.data,
-      listCards: cards.data,
+      listCards: cards || null,
     },
   };
 });

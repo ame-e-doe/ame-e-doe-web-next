@@ -93,9 +93,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
         toast.error(err.response.data.message);
       } else {
         const er: ErrorApi[] = err.response.data.errors;
-        er.forEach((e) => {
-          toast.error(e.addInformation + " " + e.message);
-        });
+        if (er) {
+          er.forEach((e) => {
+            toast.error(e.addInformation + " " + e.message);
+          });
+        } else {
+          toast.error("Email ou senha inválidos!");
+        }
       }
     }
   }
@@ -118,9 +122,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
         toast.error(err.response.data.message);
       } else {
         const er: ErrorApi[] = err.response.data.errors;
-        er.forEach((e) => {
-          toast.error(e.addInformation + " " + e.message);
-        });
+        if (er) {
+          er.forEach((e) => {
+            toast.error(e.addInformation + " " + e.message);
+          });
+        } else {
+          toast.error("Algo deu errado, tente novamente mais tarde.");
+        }
       }
     }
   }
