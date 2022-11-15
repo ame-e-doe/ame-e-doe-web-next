@@ -11,12 +11,8 @@ import { Card } from "../models/card-type";
 import styles from "../../styles/cart.module.scss";
 import Header from "../components/header";
 
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import IconButton from "@mui/material/IconButton";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import ComboBox from "../components/selectButton";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export interface ShoppingCart {
   cart: CartType;
@@ -27,12 +23,21 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
   const [itens, setItens] = useState<CartType>(cart);
   const [cards, setCards] = useState<Card[]>(listCards);
   const [cartItens, setCartItens] = useState<CartItem[]>(itens?.cartItems);
+  const [cardSelected, setCardSelected] = useState("");
 
   let listProducts: Product[] = [];
 
   itens?.cartItems.forEach((i) => {
     listProducts.push(i.product);
   });
+
+  let optionsCardName: string[] = [];
+  if (cards?.length > 0) {
+    cards.forEach((c) => {
+      let num = c.cardNumber.substring(12, 16);
+      optionsCardName.push(`Cartão terminado em ****${num}`);
+    });
+  }
 
   const api = setupApiClient();
 
@@ -102,9 +107,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-            >
-              
-            </div>
+            ></div>
           </div>
           <div className={styles.cartRight}>
             <h2
@@ -146,7 +149,24 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
               Selecione o Cartão
             </h2>
 
-            <ComboBox option={cards} />
+            <Autocomplete
+              disableCloseOnSelect
+              id="combo-box-demo"
+              disabled={cards?.length === 0 || !cards}
+              options={optionsCardName}
+              sx={{ width: "80%", marginTop: "20px", marginLeft: "10%" }}
+              onChange={(event: any, newValue: string | null) => {
+                setCardSelected(newValue);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={
+                    !cards ? "Nenhum cartão cadastrado" : "Cartões cadastrados"
+                  }
+                />
+              )}
+            />
             <button
               style={{
                 marginTop: "10%",
@@ -159,8 +179,10 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
                 color: "var(--white)",
                 fontWeight: "bold",
               }}
+              disabled={listProducts.length === 0 || cardSelected === ""}
               className={styles.buttonFinal}
               type="submit"
+              onClick={finishOrder}
             >
               Finalizar compra
             </button>
