@@ -17,14 +17,6 @@ export default function Card() {
   async function saveCard(event: FormEvent) {
     event.preventDefault();
 
-    //preicso validar antes de criar este objeto
-    const card: CreateCardDto = {
-      cardNumber: numCard,
-      printedName: name,
-      expirationDate: validate,
-      securityCode: cvv,
-    };
-
     const cardNumber = numCard;
     const printedName = name;
     const expirationDate = validate;
