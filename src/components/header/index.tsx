@@ -24,7 +24,7 @@ export default function Header() {
   };
 
   const cart = () => {
-    Router.push("/cart2");
+    Router.push("/cart");
     setAnchorEl(null);
   };
 
