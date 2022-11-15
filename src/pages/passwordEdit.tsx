@@ -11,18 +11,20 @@ import { destroyCookie } from "nookies";
 import { PasswordEditDto } from "../dto/password-edit-dto";
 
 export default function PasswordEdit() {
-  const [teste1, setOldPassword] = useState("");
-  const [teste2, setNewPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   async function alterPassword(event: FormEvent) {
     event.preventDefault();
     const api = setupApiClient();
 
-    const oldPassword = teste1;
-    const newPassword = teste2;
+    const edit: PasswordEditDto = {
+      oldPassword,
+      newPassword,
+    };
 
     await api
-      .post("user/reset/password", { oldPassword, newPassword })
+      .put("user/reset/password", edit)
       .then((response) => {
         toast.success("Senha alterada com sucesso!");
         destroyCookie(undefined, "@nextauth.token");
@@ -51,14 +53,14 @@ export default function PasswordEdit() {
           <Input
             placeholder="Senha antiga"
             type="password"
-            value={teste1}
+            value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)}
           />
 
           <Input
             placeholder="Senha nova"
             type="password"
-            value={teste2}
+            value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
           />
 
