@@ -19,6 +19,7 @@ export default function Details(product: Product) {
   (produto.value != null) ? price = produto.value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) : 0;
   
 
+  console.log(produto)
   //response();
 
   return (
