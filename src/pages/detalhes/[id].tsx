@@ -29,9 +29,9 @@ export default function Detalhes() {
   console.log(produto);
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.container}>
       <Header />
-      <div className={styles.myImages}>
+      <div className={styles.detalhes}>
         <Details {...produto}></Details>
       </div>
     </div>

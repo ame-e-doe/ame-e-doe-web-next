@@ -78,7 +78,6 @@ export default function Details(product: Product) {
           </div>
         </div>
       </div>
-      <div className={styles.secundario}></div>
     </div>
   );
 }
