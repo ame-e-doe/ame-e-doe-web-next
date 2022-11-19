@@ -33,7 +33,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
   let listProducts: Product[] = [];
 
   itens?.cartItems.forEach((i) => {
-    listProducts.push(i.product);
+    listProducts.push({ ...i.product, id: i.id });
   });
 
   let optionsCardName: string[] = [];
@@ -72,13 +72,9 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
       .delete(`/cart/${itemId}`)
       .then((response) => {
         toast.success("Item removido com sucesso");
-
-        setCartItens(
-          itens.cartItems.filter((i) => {
-            return i.id !== itemId;
-          })
-        );
-        console.log(response);
+        setCartItens( (prevState) => { 
+          return prevState.filter(i => i.id !== itemId);
+        })
       })
       .catch((error) => {
         toast.error("Algo deu errado, tente novamente mais tarde.");
@@ -86,6 +82,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
       });
   }
 
+  console.log(cartItens);
   return (
     <div className={styles.Container}>
       <Header />
@@ -110,7 +107,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
               style={{ gap: "3rem", display: "flex", flexWrap: "wrap" }}
               sx={{ width: "80%", marginLeft: "20px" }}
             >
-              {listProducts.map((item) => {
+              {cartItens.map((item) => {
                 console.log(item);
                 return (
                   <ImageListItem
@@ -129,18 +126,18 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
                         height: "100%",
                         borderRadius: "15px",
                       }}
-                      src={item.image.url}
-                      alt={item.title}
+                      src={item.product.image.url}
+                      alt={item.product.title}
                     />
                     <div className={styles.infosCart}>
                       <label style={{ paddingBottom: "5px" }}>
-                        {item.title}
+                        {item.product.title}
                       </label>
                       <label style={{ paddingBottom: "5px" }}>
-                        {item.category.description}
+                        {item.product.category.description}
                       </label>
                       <label style={{ paddingBottom: "5px" }}>
-                        R$ {item.value}
+                        R$ {item.product.value}
                       </label>
 
                       <label
