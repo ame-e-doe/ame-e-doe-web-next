@@ -14,6 +14,11 @@ import Header from "../components/header";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import IconButton from "@mui/material/IconButton";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 export interface ShoppingCart {
   cart: CartType;
   listCards: Card[] | null;
@@ -28,7 +33,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
   let listProducts: Product[] = [];
 
   itens?.cartItems.forEach((i) => {
-    listProducts.push(i.product);
+    listProducts.push({ ...i.product, id: i.id });
   });
 
   let optionsCardName: string[] = [];
@@ -67,13 +72,9 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
       .delete(`/cart/${itemId}`)
       .then((response) => {
         toast.success("Item removido com sucesso");
-
-        setCartItens(
-          itens.cartItems.filter((i) => {
-            return i.id !== itemId;
-          })
-        );
-        console.log(response);
+        setCartItens( (prevState) => { 
+          return prevState.filter(i => i.id !== itemId);
+        })
       })
       .catch((error) => {
         toast.error("Algo deu errado, tente novamente mais tarde.");
@@ -81,6 +82,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
       });
   }
 
+  console.log(cartItens);
   return (
     <div className={styles.Container}>
       <Header />
@@ -100,6 +102,63 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
             >
               ITENS
             </h3>
+
+            <ImageList
+              style={{ gap: "3rem", display: "flex", flexWrap: "wrap" }}
+              sx={{ width: "80%", marginLeft: "20px" }}
+            >
+              {cartItens.map((item) => {
+                console.log(item);
+                return (
+                  <ImageListItem
+                    style={{
+                      height: "250px",
+                      maxWidth: "500px",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                    key={item.id}
+                  >
+                    <img
+                      style={{
+                        width: "250px",
+                        height: "100%",
+                        borderRadius: "15px",
+                      }}
+                      src={item.product.image.url}
+                      alt={item.product.title}
+                    />
+                    <div className={styles.infosCart}>
+                      <label style={{ paddingBottom: "5px" }}>
+                        {item.product.title}
+                      </label>
+                      <label style={{ paddingBottom: "5px" }}>
+                        {item.product.category.description}
+                      </label>
+                      <label style={{ paddingBottom: "5px" }}>
+                        R$ {item.product.value}
+                      </label>
+
+                      <label
+                        onClick={() => {
+                          removeItem(item.id);
+                        }}
+                      >
+                        <DeleteForeverIcon
+                          style={{
+                            color: "#E91C5D",
+                            cursor: "pointer",
+                            marginTop: "10px",
+                          }}
+                        />
+                      </label>
+                    </div>
+                  </ImageListItem>
+                );
+              })}
+            </ImageList>
+
             <div
               style={{
                 padding: "2rem",
