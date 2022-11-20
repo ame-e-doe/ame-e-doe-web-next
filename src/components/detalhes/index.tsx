@@ -39,6 +39,21 @@ export default function Details(product: Product) {
     }
   }
 
+  async function addProductCartPrev(idProduct: number) {
+    if (idProduct > 0) {
+      await api
+        .put(`/cart/add-product/${idProduct}`)
+        .then(() => {
+          toast.success("Item adicionado ao carrinho");
+          Router.push("/");
+        })
+        .catch(() => {
+          toast.error("algo deu errado, tente novamente mais tarde");
+          Router.push("/");
+        });
+    }
+  }
+
   return (
     <div className={styles.panel}>
       <div className={styles.principal}>
@@ -54,10 +69,10 @@ export default function Details(product: Product) {
               <span>Tipo: </span> <label>{produto.image.format}</label>
             </div>
             <div>
-              <span>Tamanho: </span> <label>51.4KB</label>
+              <span>Tamanho: </span> <label> {product.image.size} KB </label>
             </div>
             <div>
-              <span>Dimensões: </span>{" "}
+              <span>Dimensões: </span>
               <label>
                 {produto.image.height} x {produto.image.widht}
               </label>
@@ -75,6 +90,7 @@ export default function Details(product: Product) {
           <div>
             <span className={styles.value}>{price}</span>
             <button onClick={() => addProductCart(produto.id)}>Comprar</button>
+            <button onClick={() => addProductCartPrev(produto.id)}>Adicionar ao Carrinho</button>
           </div>
         </div>
       </div>

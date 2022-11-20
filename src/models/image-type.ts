@@ -6,4 +6,5 @@ export type Image = {
   imageId: string;
   name: string;
   url: string;
+  size: number;
 };
