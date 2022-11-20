@@ -4,7 +4,12 @@ import { setupApiClient } from "../services/api";
 import { canSSRAuth } from "../utils/canSSRAuth";
 import { Product } from "../models/product-type";
 import Header from "../components/header";
-import { ImageList, ImageListItem, ImageListItemBar, Link } from "@mui/material";
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  Link,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import { Details } from "@mui/icons-material";
 
@@ -24,76 +29,76 @@ export default function Home({ listProduct }: ProductList) {
       listProducts.push(s);
     });
   }
-  
+
   return (
     <div className={styles.Container}>
       <Header />
-      <div className={styles.logoLove}>
-        <h1>AME E DOE</h1>
-      </div>
       <div className={styles.boxCarousel}>
-      <div className={styles.myImages}>
-        <div
-          style={{
-            padding: "2rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <ImageList
+        <div className={styles.myImages}>
+          <div className={styles.logoLove}>
+            <h1>AME E DOE</h1>
+          </div>
+          <div
             style={{
-              gap: "3rem",
+              padding: "2rem",
               display: "flex",
-              flexWrap: "wrap",
+              alignItems: "center",
               justifyContent: "center",
             }}
-            sx={{ width: "100%" }}
           >
-            {listProducts.map((item) => {
-              console.log(item);
-              return (
-                <ImageListItem
-                  style={{ height: "250px", maxWidth: "250px" }}
-                  key={item.id}
-                >
-                  <img
-                    style={{
-                      width: "250px",
-                      height: "100%",
-                      borderRadius: "15px",
-                    }}
-                    src={item.image.url}
-                    alt={item.title}
-                  />
-                  <ImageListItemBar
-                    title={
-                      <div
-                        style={{ height: "30px", whiteSpace: "break-spaces" }}
-                      >
-                        <Link
-                          style={{
-                            color:
-                              router.pathname == "/detalhes"
-                                ? "#e91c5d"
-                                : "#FFF",
-                          }}
-                          href={"/detalhes/" + item.id}
+            <ImageList
+              style={{
+                gap: "3rem",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+              sx={{ width: "100%" }}
+            >
+              {listProducts.map((item) => {
+                console.log(item);
+                return (
+                  <ImageListItem
+                    style={{ height: "250px", maxWidth: "250px" }}
+                    key={item.id}
+                  >
+                    <img 
+                      style={{
+                        width: "250px",
+                        height: "100%",
+                        borderRadius: "15px",
+                        cursor: "pointer",
+                      }}
+                      src={item.image.url}
+                      alt={item.title}
+                    />
+                    <ImageListItemBar
+                      title={
+                        <div
+                          style={{ height: "30px", whiteSpace: "break-spaces" }}
                         >
-                          {item.title}
-                        </Link>
-                      </div>
-                    }
-                  />
-                </ImageListItem>
-              );
-            })}
-          </ImageList>
+                          <Link
+                            style={{
+                              color:
+                                router.pathname == "/detalhes"
+                                  ? "#e91c5d"
+                                  : "#FFF",
+                            }}
+                            href={"/detalhes/" + item.id}
+                          >
+                            {item.title}
+                          </Link>
+                        </div>
+                      }
+                    />
+                  </ImageListItem>
+                );
+              })}
+            </ImageList>
+          </div>
         </div>
       </div>
-      </div>
     </div>
-    
   );
 }
 
