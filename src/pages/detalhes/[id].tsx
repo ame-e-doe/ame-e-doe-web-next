@@ -24,6 +24,7 @@ export default function Detalhes() {
       imageId: '',
       name: '',
       url: '',
+      size: 0,
     },
   }
   console.log(produto);
