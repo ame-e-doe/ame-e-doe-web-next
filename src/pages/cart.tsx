@@ -16,8 +16,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import IconButton from "@mui/material/IconButton";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 export interface ShoppingCart {
   cart: CartType;
@@ -33,7 +31,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
   let listProducts: Product[] = [];
 
   itens?.cartItems.forEach((i) => {
-    listProducts.push({ ...i.product, id: i.id });
+    listProducts.push(i.product);
   });
 
   let optionsCardName: string[] = [];
@@ -72,9 +70,9 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
       .delete(`/cart/${itemId}`)
       .then((response) => {
         toast.success("Item removido com sucesso");
-        setCartItens( (prevState) => { 
-          return prevState.filter(i => i.id !== itemId);
-        })
+        setCartItens((prevState) => {
+          return prevState.filter((i) => i.id !== itemId);
+        });
       })
       .catch((error) => {
         toast.error("Algo deu errado, tente novamente mais tarde.");
