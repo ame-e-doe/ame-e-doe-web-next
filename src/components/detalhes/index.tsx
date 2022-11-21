@@ -88,9 +88,16 @@ export default function Details(product: Product) {
           </div>
 
           <div>
-            <span className={styles.value}>{price}</span>
+            <span className={styles.value}>
+              {price.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </span>
             <button onClick={() => addProductCart(produto.id)}>Comprar</button>
-            <button onClick={() => addProductCartPrev(produto.id)}>Adicionar ao Carrinho</button>
+            <button onClick={() => addProductCartPrev(produto.id)}>
+              Adicionar ao Carrinho
+            </button>
           </div>
         </div>
       </div>

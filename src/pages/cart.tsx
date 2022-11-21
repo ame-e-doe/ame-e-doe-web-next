@@ -17,6 +17,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { InterestsSharp } from "@mui/icons-material";
 export interface ShoppingCart {
   cart: CartType;
   listCards: Card[] | null;
@@ -78,6 +79,11 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
         toast.error("Algo deu errado, tente novamente mais tarde.");
         console.log(error);
       });
+
+    const c = await api.get<CartType>("/cart").then((response) => {
+      return response.data;
+    });
+    setItens(c);
   }
 
   console.log(cartItens);
@@ -135,7 +141,10 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
                         {item.product.category.description}
                       </label>
                       <label style={{ paddingBottom: "5px" }}>
-                        R$ {item.product.value}
+                        {item.product.value.toLocaleString("pt-br", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
                       </label>
 
                       <label
@@ -180,19 +189,29 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
             </h2>
             <div className={styles.itens}>
               <h3> Itens: </h3>
-              <h3> {listProducts.length} </h3>
+              <h3> {cartItens.length} </h3>
             </div>
 
             <div className={styles.total}>
               <h3> Total: </h3>
-              <h3> R$: {cart.total} </h3>
+              <h3>
+                {itens.total.toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </h3>
             </div>
 
             <div className={styles.lineSale}></div>
 
             <div className={styles.totalPedido}>
               <h3> Total pedido </h3>
-              <h3> R$: {cart.total} </h3>
+              <h3>
+                {itens.total.toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </h3>
             </div>
 
             <h2
