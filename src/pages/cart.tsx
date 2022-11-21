@@ -74,20 +74,16 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
         setCartItens((prevState) => {
           return prevState.filter((i) => i.id !== itemId);
         });
-
-        let newTotal = 0;
-        cartItens.forEach((ci) => {
-          newTotal = +ci.price;
-        });
-
-        itens.total = newTotal;
-        itens.cartItems = cartItens;
-        setItens(itens);
       })
       .catch((error) => {
         toast.error("Algo deu errado, tente novamente mais tarde.");
         console.log(error);
       });
+
+    const c = await api.get<CartType>("/cart").then((response) => {
+      return response.data;
+    });
+    setItens(c);
   }
 
   console.log(cartItens);
@@ -199,7 +195,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
             <div className={styles.total}>
               <h3> Total: </h3>
               <h3>
-                {cart.total.toLocaleString("pt-br", {
+                {itens.total.toLocaleString("pt-br", {
                   style: "currency",
                   currency: "BRL",
                 })}
@@ -211,7 +207,7 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
             <div className={styles.totalPedido}>
               <h3> Total pedido </h3>
               <h3>
-                {cart.total.toLocaleString("pt-br", {
+                {itens.total.toLocaleString("pt-br", {
                   style: "currency",
                   currency: "BRL",
                 })}
