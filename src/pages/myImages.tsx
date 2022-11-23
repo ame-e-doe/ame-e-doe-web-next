@@ -26,7 +26,7 @@ export default function myImages({ orderList }: ListOrder) {
     const image = await fetch(imageSrc);
     const imageBlog = await image.blob();
     const imageURL = URL.createObjectURL(imageBlog);
-  
+
     const link = document.createElement("a");
     link.href = imageURL;
     link.download = file;
@@ -64,52 +64,69 @@ export default function myImages({ orderList }: ListOrder) {
             justifyContent: "center",
           }}
         >
-          <ImageList
-            style={{
-              gap: "3rem",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-            sx={{ width: "100%" }}
-          >
-            {listProducts.map((item) => {
-              console.log(item);
-              return (
-                <ImageListItem
-                  style={{ height: "250px", maxWidth: "250px" }}
-                  key={item.id}
-                >
-                  <img
-                    style={{
-                      width: "250px",
-                      height: "100%",
-                      borderRadius: "15px",
-                    }}
-                    src={item.image.url}
-                    alt={item.title}
-                  />
-                  <ImageListItemBar
-                    title={
-                      <div
-                        style={{ height: "30px", whiteSpace: "break-spaces" }}
-                      >
-                        {item.title}
-                      </div>
-                    }
-                    actionIcon={
-                      <IconButton onClick={ () => downloadImage(item.image.url, item.title)} 
-                        sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                        aria-label={`info about ${item.title}`}
-                      >
-                        <SimCardDownloadIcon style={{ color: "#E91C5D" }} />
-                      </IconButton>
-                    }
-                  />
-                </ImageListItem>
-              );
-            })}
-          </ImageList>
+          {listProducts.length > 0 ? (
+            <ImageList
+              style={{
+                gap: "3rem",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+              sx={{ width: "100%" }}
+            >
+              {listProducts.map((item) => {
+                console.log(item);
+                return (
+                  <ImageListItem
+                    style={{ height: "250px", maxWidth: "250px" }}
+                    key={item.id}
+                  >
+                    <img
+                      style={{
+                        width: "250px",
+                        height: "100%",
+                        borderRadius: "15px",
+                      }}
+                      src={item.image.url}
+                      alt={item.title}
+                    />
+                    <ImageListItemBar
+                      title={
+                        <div
+                          style={{ height: "30px", whiteSpace: "break-spaces" }}
+                        >
+                          {item.title}
+                        </div>
+                      }
+                      actionIcon={
+                        <IconButton
+                          onClick={() =>
+                            downloadImage(item.image.url, item.title)
+                          }
+                          sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                          aria-label={`info about ${item.title}`}
+                        >
+                          <SimCardDownloadIcon style={{ color: "#E91C5D" }} />
+                        </IconButton>
+                      }
+                    />
+                  </ImageListItem>
+                );
+              })}
+            </ImageList>
+          ) : (
+            <h3
+              style={{
+                padding: "2rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#fff",
+              }}
+            >
+              Você ainda não tem imagens
+            </h3>
+          )}
         </div>
       </div>
     </div>
