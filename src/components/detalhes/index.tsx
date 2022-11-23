@@ -69,7 +69,7 @@ export default function Details(product: Product) {
               <span>Tipo: </span> <label>{produto.image.format}</label>
             </div>
             <div>
-              <span>Tamanho: </span> <label> {product.image.size} KB </label>
+              <span>Tamanho: </span> <label> {produto.image.size} KB </label>
             </div>
             <div>
               <span>Dimensões: </span>
