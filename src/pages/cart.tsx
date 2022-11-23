@@ -107,64 +107,78 @@ export default function Cart({ cart, listCards }: ShoppingCart) {
               ITENS
             </h3>
 
-            <ImageList
-              style={{ gap: "3rem", display: "flex", flexWrap: "wrap" }}
-              sx={{ width: "80%", marginLeft: "20px" }}
-            >
-              {cartItens.map((item) => {
-                console.log(item);
-                return (
-                  <ImageListItem
-                    style={{
-                      height: "250px",
-                      maxWidth: "500px",
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                    key={item.id}
-                  >
-                    <img
+            {cartItens.length > 0 ? (
+              <ImageList
+                style={{ gap: "3rem", display: "flex", flexWrap: "wrap" }}
+                sx={{ width: "80%", marginLeft: "20px" }}
+              >
+                {cartItens.map((item) => {
+                  console.log(item);
+                  return (
+                    <ImageListItem
                       style={{
-                        width: "250px",
-                        height: "100%",
-                        borderRadius: "15px",
+                        height: "250px",
+                        maxWidth: "500px",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
                       }}
-                      src={item.product.image.url}
-                      alt={item.product.title}
-                    />
-                    <div className={styles.infosCart}>
-                      <label style={{ paddingBottom: "5px" }}>
-                        {item.product.title}
-                      </label>
-                      <label style={{ paddingBottom: "5px" }}>
-                        {item.product.category.description}
-                      </label>
-                      <label style={{ paddingBottom: "5px" }}>
-                        {item.product.value.toLocaleString("pt-br", {
-                          style: "currency",
-                          currency: "BRL",
-                        })}
-                      </label>
-
-                      <label
-                        onClick={() => {
-                          removeItem(item.id);
+                      key={item.id}
+                    >
+                      <img
+                        style={{
+                          width: "250px",
+                          height: "100%",
+                          borderRadius: "15px",
                         }}
-                      >
-                        <DeleteForeverIcon
-                          style={{
-                            color: "#E91C5D",
-                            cursor: "pointer",
-                            marginTop: "10px",
+                        src={item.product.image.url}
+                        alt={item.product.title}
+                      />
+                      <div className={styles.infosCart}>
+                        <label style={{ paddingBottom: "5px" }}>
+                          {item.product.title}
+                        </label>
+                        <label style={{ paddingBottom: "5px" }}>
+                          {item.product.category.description}
+                        </label>
+                        <label style={{ paddingBottom: "5px" }}>
+                          {item.product.value.toLocaleString("pt-br", {
+                            style: "currency",
+                            currency: "BRL",
+                          })}
+                        </label>
+
+                        <label
+                          onClick={() => {
+                            removeItem(item.id);
                           }}
-                        />
-                      </label>
-                    </div>
-                  </ImageListItem>
-                );
-              })}
-            </ImageList>
+                        >
+                          <DeleteForeverIcon
+                            style={{
+                              color: "#E91C5D",
+                              cursor: "pointer",
+                              marginTop: "10px",
+                            }}
+                          />
+                        </label>
+                      </div>
+                    </ImageListItem>
+                  );
+                })}
+              </ImageList>
+            ) : (
+              <h3
+                style={{
+                  padding: "2rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fff",
+                }}
+              >
+                Seu carrinho está vazio
+              </h3>
+            )}
 
             <div
               style={{
